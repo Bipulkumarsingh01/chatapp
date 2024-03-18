@@ -1,0 +1,44 @@
+<template>
+    <div class="quick-chat-container" if.bind="!joined">
+      <div class="quick-chat-title">Quick Chat</div>
+      <input type="text" value.bind="userName" placeholder="Enter your name" />
+      <input type="text" value.bind="roomID" placeholder="Enter room ID" />
+      <button click.delegate="joinChat()">Join Chat</button>
+    </div>
+  
+    <div id="chatContainer" class="container" if.bind="joined">
+      <header>
+        <div class="user-info">UserName: ${userName}</div>
+        <div class="room-id">Room ID: ${roomID}</div>
+        <div class="header-right">
+          <span class="live-chat">Live Chat</span>
+          <button click.delegate="leaveRoom()">Leave Room</button>
+        </div>
+      </header>
+  
+      <div class="content">
+        <!-- Sidebar user list -->
+        <div class="sidebar">
+          <div class="sidebar-header">ACTIVE USERS</div>
+          <div class="user-list">
+            <div repeat.for="user of users" class.bind="user.status === 'online' ? 'user-item online' : 'user-item offline'">
+              <span class="user-status" style.bind="user.status === 'online' ? 'background-color: green;' : 'background-color: red;'"></span>
+              <span class="username">${user.name}</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Chat area -->
+        <div class="chat-area">
+          <ul id="messages">
+            <li repeat.for="message of messages">${message}</li>
+          </ul>
+          <form submit.delegate="sendMessage()">
+            <input type="text" value.bind="messageInput" placeholder="Type your message here..." />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </template>
+  

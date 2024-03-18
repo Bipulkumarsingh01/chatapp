@@ -1,0 +1,30 @@
+<template>
+  <header>
+    <h1>Welcome to the Chat App</h1>
+  </header>
+  <main>
+    <!-- Chat room component -->
+    <require from="./chat-room/chat-room.html"></require>
+    <chat-room></chat-room>
+
+    <!-- Other components or content can go here -->
+  </main>
+</template>
+
+
+
+<template>
+  <require from="./styles.css"></require>
+  
+  <div class="container">
+    <nav>
+      <ul>
+        <li repeat.for="row of router.navigation" class="${row.isActive ? 'active' : ''}">
+          <a href.bind="row.href">${row.title}</a>
+        </li>
+      </ul>
+    </nav>
+
+    <router-view></router-view>
+  </div>
+</template>
